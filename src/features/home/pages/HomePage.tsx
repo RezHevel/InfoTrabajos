@@ -83,12 +83,12 @@ export default function Home() {
             </a>
           </nav>
           <div className="hidden items-center gap-4 lg:flex">
-            <Link to="/auth/singin">
+            <Link to="/auth/SignIn">
               <button className="cursor-pointer text-sm font-bold text-primary transition-colors hover:text-accent">
                 Iniciar sesión
               </button>
             </Link>
-            <Link to="/auth/register">
+            <Link to="/auth/Register">
               <button className="cursor-pointer rounded-xl bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/15 transition hover:-translate-y-0.5 hover:bg-primary/90">
                 Regístrate
               </button>

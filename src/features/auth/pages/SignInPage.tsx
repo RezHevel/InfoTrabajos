@@ -95,7 +95,9 @@ export function LoginForm() {
         />{" "}
         Mantener mi sesión iniciada
       </label>
-      <Link to="/dashboards/DashEmpleado">
+      <Link to="/dashboard/client">
+        {" "}
+        {/* link para entrar a diferentes dashboard (client,employee,admin)*/}
         <button
           type="submit"
           className="group flex h-13 w-full items-center justify-center gap-3 rounded-xl bg-[#082d5c] px-5 text-sm font-bold text-white shadow-[0_12px_24px_-12px_#082d5c] transition hover:-translate-y-0.5 hover:bg-[#0b3a73] focus:outline-none focus:ring-4 focus:ring-[#082d5c]/20"
@@ -110,12 +112,14 @@ export function LoginForm() {
 
       <p className="text-center text-xs text-[#5d7188]">
         ¿Aún no tienes una cuenta?{" "}
-        <button
-          type="button"
-          className="font-bold text-[#087fc0] underline-offset-4 hover:underline"
-        >
-          Regístrate gratis
-        </button>
+        <Link to="/auth/register">
+          <button
+            type="button"
+            className="font-bold text-[#087fc0] underline-offset-4 hover:underline cursor-pointer"
+          >
+            Regístrate gratis
+          </button>
+        </Link>
       </p>
     </form>
   );
