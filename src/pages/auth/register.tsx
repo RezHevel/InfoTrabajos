@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -38,8 +37,8 @@ export default function Register() {
 
   return (
     <main className="min-h-screen bg-[#f5faff] px-0 py-0 sm:px-6 sm:py-6 lg:px-10 lg:py-10">
-      <div className="mx-auto flex min-h-[calc(100vh-3rem)] max-w-7xl overflow-hidden bg-white shadow-[0_24px_80px_-32px_rgba(8,45,92,.35)] sm:rounded-[2rem]">
-        <section className="relative hidden min-h-[650px] overflow-hidden bg-[#eaf6fd] lg:flex lg:w-[50%] lg:flex-col lg:justify-between lg:p-10">
+      <div className="mx-auto flex min-h-[calc(100vh-3rem)] max-w-7xl overflow-hidden bg-white shadow-[0_24px_80px_-32px_rgba(8,45,92,.35)] sm:rounded-4xl">
+        <section className="relative hidden min-h-162.5 overflow-hidden bg-[#eaf6fd] lg:flex lg:w-[50%] lg:flex-col lg:justify-between lg:p-10">
           <div
             className="absolute inset-0 opacity-50"
             style={{
@@ -81,7 +80,7 @@ export default function Register() {
           </div>
           <div
             aria-hidden="true"
-            className="absolute bottom-[-80px] right-[-50px] size-80 rounded-full border-[26px] border-[#f5ab00]/30"
+            className="absolute -bottom-20 -right-12.5 size-80 rounded-full border-26 border-[#f5ab00]/30"
           />
           <div
             aria-hidden="true"

@@ -10,6 +10,8 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { Link } from "react-router-dom";
+
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -93,16 +95,19 @@ export function LoginForm() {
         />{" "}
         Mantener mi sesión iniciada
       </label>
-      <button
-        type="submit"
-        className="group flex h-13 w-full items-center justify-center gap-3 rounded-xl bg-[#082d5c] px-5 text-sm font-bold text-white shadow-[0_12px_24px_-12px_#082d5c] transition hover:-translate-y-0.5 hover:bg-[#0b3a73] focus:outline-none focus:ring-4 focus:ring-[#082d5c]/20"
-      >
-        {submitted ? "¡Bienvenido de nuevo!" : "Iniciar sesión"}
-        <ArrowRight
-          aria-hidden="true"
-          className="size-4 transition-transform group-hover:translate-x-1"
-        />
-      </button>
+      <Link to="/dashboards/DashEmpleado">
+        <button
+          type="submit"
+          className="group flex h-13 w-full items-center justify-center gap-3 rounded-xl bg-[#082d5c] px-5 text-sm font-bold text-white shadow-[0_12px_24px_-12px_#082d5c] transition hover:-translate-y-0.5 hover:bg-[#0b3a73] focus:outline-none focus:ring-4 focus:ring-[#082d5c]/20"
+        >
+          {submitted ? "¡Bienvenido de nuevo!" : "Iniciar sesión"}
+          <ArrowRight
+            aria-hidden="true"
+            className="size-4 transition-transform group-hover:translate-x-1"
+          />
+        </button>
+      </Link>
+
       <p className="text-center text-xs text-[#5d7188]">
         ¿Aún no tienes una cuenta?{" "}
         <button
