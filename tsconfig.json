@@ -9,7 +9,8 @@
     "ignoreDeprecations": "6.0",
     "paths": {
       "@/*": ["./src/*"],
-      "@pages/*": ["./src/pages/*"]
+      "@pages/*": ["./src/pages/*"],
+      "@styles/*": ["./src/styles/*"]
     }
   }
 }

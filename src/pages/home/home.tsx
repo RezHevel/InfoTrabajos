@@ -1,5 +1,6 @@
 "use client";
-import "../../App.css";
+import "@styles/home.css";
+import { Link } from "react-router-dom";
 
 import { useState } from "react";
 import {
@@ -52,7 +53,7 @@ export default function Home() {
             aria-label="InfoTrabajos, inicio"
           >
             <span className="brand-mark">
-              <span>i</span>
+              <span></span> {/* colocar logo de InfoTrabajos */}
             </span>
             <span className="text-xl font-bold tracking-tight text-primary sm:text-2xl">
               Info<span className="text-accent">Trabajos</span>
@@ -82,12 +83,16 @@ export default function Home() {
             </a>
           </nav>
           <div className="hidden items-center gap-4 lg:flex">
-            <button className="text-sm font-bold text-primary transition-colors hover:text-accent">
-              Iniciar sesión
-            </button>
-            <button className="rounded-xl bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/15 transition hover:-translate-y-0.5 hover:bg-primary/90">
-              Regístrate
-            </button>
+            <Link to="/auth/singin">
+              <button className="cursor-pointer text-sm font-bold text-primary transition-colors hover:text-accent">
+                Iniciar sesión
+              </button>
+            </Link>
+            <Link to="/auth/register">
+              <button className="cursor-pointer rounded-xl bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/15 transition hover:-translate-y-0.5 hover:bg-primary/90">
+                Regístrate
+              </button>
+            </Link>
           </div>
           <button
             className="rounded-lg p-2 text-primary lg:hidden"
@@ -222,7 +227,10 @@ export default function Home() {
                   aria-label="Tu ubicación"
                 />
               </label>
-              <button className="button-primary justify-center">
+              <button
+                className="button-primary justify-center"
+                onClick={() => alert("Función de búsqueda no implementada")}
+              >
                 Buscar ahora <ArrowRight size={17} />
               </button>
             </div>
@@ -339,7 +347,11 @@ export default function Home() {
               clientes y haciendo crecer su negocio.
             </p>
           </div>
-          <a href="#contacto" className="button-accent shrink-0">
+          <a
+            href="#contacto"
+            className="button-accent shrink-0"
+            onClick={() => alert("Función de contacto no implementada")}
+          >
             Quiero ofrecer mis servicios <ArrowRight size={17} />
           </a>
         </div>
