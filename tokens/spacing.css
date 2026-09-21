@@ -1,0 +1,24 @@
+:root{
+/* 4px base, compact utilitarian rhythm. */
+--space-0:0;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;
+--space-5:20px;--space-6:24px;--space-7:32px;--space-8:40px;--space-9:56px;
+--space-10:72px;--space-11:96px;
+
+/* Component insets */
+--inset-control:0 14px;      /* button / input horizontal */
+--inset-card:16px;
+--inset-card-lg:20px;
+--inset-sheet:20px 20px 24px;
+
+/* Control heights — tap targets never below 44px on mobile surfaces */
+--control-h-sm:34px;--control-h:40px;--control-h-lg:48px;--control-h-touch:52px;
+
+/* Layout */
+--layout-max:1200px;
+--layout-gutter:24px;
+--layout-gutter-mobile:16px;
+--app-width:390px;          /* mobile mock canvas */
+--sidebar-w:248px;
+--stack-gap:12px;
+--grid-gap:16px;
+}

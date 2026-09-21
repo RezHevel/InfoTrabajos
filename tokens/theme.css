@@ -1,0 +1,64 @@
+/* Theme scopes. Set data-theme on any container (the app root, the phone mock
+   or <html>) — every semantic alias resolves inside it.
+
+   :root above is the light app theme with a dark authentication surface, which
+   is the default product behaviour. */
+
+/* Light: also lightens login / registro / splash. */
+[data-theme="light"]{
+--auth-bg:linear-gradient(180deg, var(--blue-50) 0%, var(--slate-25) 60%);
+--auth-card:var(--slate-0);
+--auth-card-border:var(--border-default);
+--auth-field:var(--slate-50);
+--auth-text:var(--slate-900);
+--auth-text-muted:var(--slate-500);
+--auth-cta:linear-gradient(180deg, var(--blue-400) 0%, var(--blue-600) 100%);
+}
+
+/* Dark: full app in navy. */
+[data-theme="dark"]{
+--surface-page:var(--navy-900);
+--surface-card:var(--navy-800);
+--surface-sunken:var(--navy-700);
+--surface-raised:var(--navy-700);
+--surface-inverse:var(--slate-0);
+--surface-hover:var(--navy-700);
+--surface-press:var(--navy-600);
+--surface-disabled:var(--navy-700);
+
+--text-strong:var(--slate-25);
+--text-body:var(--slate-200);
+--text-muted:var(--slate-400);
+--text-subtle:var(--slate-500);
+--text-on-inverse:var(--navy-900);
+--text-link:var(--blue-300);
+--text-link-hover:var(--blue-200);
+
+--border-hairline:color-mix(in oklab, var(--slate-0) 10%, transparent);
+--border-default:color-mix(in oklab, var(--slate-0) 16%, transparent);
+--border-strong:color-mix(in oklab, var(--slate-0) 28%, transparent);
+--border-inverse:var(--slate-200);
+
+--brand:var(--blue-400);
+--brand-hover:var(--blue-300);
+--brand-press:var(--blue-500);
+--brand-soft:color-mix(in oklab, var(--blue-400) 22%, transparent);
+--brand-soft-border:color-mix(in oklab, var(--blue-300) 40%, transparent);
+
+--state-go-soft:color-mix(in oklab, var(--go-500) 28%, transparent);
+--state-warn-soft:color-mix(in oklab, var(--warn-500) 28%, transparent);
+--state-stop-soft:color-mix(in oklab, var(--stop-500) 28%, transparent);
+--state-info-soft:color-mix(in oklab, var(--sky-500) 30%, transparent);
+--go-700:var(--go-100);--warn-700:var(--warn-100);--stop-700:var(--stop-100);--sky-700:var(--sky-100);
+--blue-700:var(--blue-100);
+
+--bar-veil:color-mix(in oklab, var(--navy-900) 82%, transparent);
+--overlay-scrim:color-mix(in oklab, var(--navy-900) 72%, transparent);
+--shadow-1:0 1px 2px color-mix(in oklab, #000 40%, transparent);
+--shadow-2:0 2px 8px color-mix(in oklab, #000 46%, transparent);
+--shadow-3:0 8px 24px -6px color-mix(in oklab, #000 56%, transparent);
+--shadow-4:0 20px 48px -12px color-mix(in oklab, #000 66%, transparent);
+--shadow-sticky:0 1px 0 color-mix(in oklab, var(--slate-0) 12%, transparent);
+--focus-ring:0 0 0 3px color-mix(in oklab, var(--blue-300) 40%, transparent);
+}
+[data-theme="dark"] body,body[data-theme="dark"]{background:var(--surface-page);color:var(--text-body)}

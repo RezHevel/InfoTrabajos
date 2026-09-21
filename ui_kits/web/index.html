@@ -1,0 +1,64 @@
+<!-- @dsCard group="Sitio web" viewport="1280x760" name="Sitio web — home, resultados, perfil, panel" subtitle="Marketing home, búsqueda con filtros, perfil público y panel administrativo" -->
+<!-- @startingPoint section="Sitio web" subtitle="Página web con header y footer de marca" viewport="1280x900" -->
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>InfoTrabajos · Web</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="../app/data.js"></script>
+<style>body{margin:0;background:var(--surface-page)}</style>
+</head><body><div id="root"></div>
+<script type="text/babel" src="WebChrome.jsx"></script>
+<script type="text/babel" src="HomePage.jsx"></script>
+<script type="text/babel" src="ResultsPage.jsx"></script>
+<script type="text/babel" src="ProfilePage.jsx"></script>
+<script type="text/babel" src="AdminPage.jsx"></script>
+<script type="text/babel">
+const { Dialog, Button, Field, Input, Select, Textarea, Checkbox, Toast } = window.InfoTrabajosDesignSystem_1be5a5;
+
+function Site(){
+  const [page,setPage]=React.useState("home");
+  const [worker,setWorker]=React.useState(null);
+  const [publish,setPublish]=React.useState(false);
+  const [toast,setToast]=React.useState(null);
+  React.useEffect(()=>{ if(!toast) return; const t=setTimeout(()=>setToast(null),2800); return ()=>clearTimeout(t); },[toast]);
+  const nav=(p)=>{ if(p==="publicar"){setPublish(true);return;} setWorker(null); setPage(p); window.scrollTo(0,0); };
+  const openWorker=(w)=>{ setWorker(w); setPage("perfil"); window.scrollTo(0,0); };
+
+  if(page==="admin") return (<><WebHeader page="admin" onNav={nav} /><AdminPage /></>);
+
+  let body;
+  if(page==="perfil"||worker) body=<ProfilePage worker={worker} onBack={()=>nav("buscar")} />;
+  else if(page==="buscar"||page==="solicitudes") body=<ResultsPage onWorker={openWorker} />;
+  else if(page==="trabajar") body=<ResultsPage onWorker={openWorker} />;
+  else body=<HomePage onNav={nav} onWorker={openWorker} />;
+
+  return (<>
+    <WebHeader page={page} onNav={nav} />
+    {body}
+    <WebFooter />
+    {publish ? (
+      <Dialog title="Publicar una solicitud" size="lg" onClose={()=>setPublish(false)}
+        footer={<><Button variant="ghost" onClick={()=>setPublish(false)}>Cancelar</Button>
+        <Button icon="send" onClick={()=>{setPublish(false);setToast("Solicitud publicada · SOL-20470");}}>Publicar</Button></>}>
+        <div style={{display:"flex",flexDirection:"column",gap:14}}>
+          <Field label="¿Qué trabajo necesitas?" required><Input placeholder="Ej. cambiar boiler de 40 L" /></Field>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14}}>
+            <Field label="Categoría" required><Select placeholder="Elige una categoría" options={window.TRADES.map(t=>t.label)} /></Field>
+            <Field label="Zona" required><Input icon="map-pin" placeholder="Ej. Providencia" /></Field>
+          </div>
+          <Field label="Descripción" hint="Agrega medidas, materiales y fotos si tienes"><Textarea rows={3} /></Field>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14}}>
+            <Field label="Cotización estimado"><Input type="number" suffix="MXN" placeholder="3200" /></Field>
+            <Field label="Urgencia"><Select options={["Es urgente","Esta semana","Sin apuro"]} /></Field>
+          </div>
+          <Checkbox label="Compartir mi teléfono con los profesionales que postulen" />
+        </div>
+      </Dialog>
+    ) : null}
+    {toast ? <div style={{position:"fixed",right:24,bottom:24,zIndex:50}}><Toast tone="go">{toast}</Toast></div> : null}
+  </>);
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<Site/>);
+</script></body></html>

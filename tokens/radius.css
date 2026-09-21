@@ -1,0 +1,15 @@
+:root{
+/* Mostly-square corners: 2px family. Pills only for chips and avatars. */
+--radius-0:0;
+--radius-1:3px;   /* tags, inline chips */
+--radius-2:6px;   /* buttons, inputs */
+--radius-3:10px;  /* cards, sheets */
+--radius-4:14px;  /* modals, phone screens */
+--radius-pill:999px;
+--radius-circle:50%;
+
+--border-w:1px;
+--border-w-thick:2px;
+--rule-w:1px;      /* hairline dividers */
+--bar-w:3px;       /* active-state indicator bar */
+}

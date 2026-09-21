@@ -1,0 +1,18 @@
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface-page);color:var(--text-body);font:var(--type-body);letter-spacing:var(--track-body);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+h1,h2,h3,h4{margin:0;color:var(--text-strong);letter-spacing:var(--track-display)}
+h1{font:var(--type-h1)}h2{font:var(--type-h2)}h3{font:var(--type-h3)}h4{font:var(--type-h4)}
+p{margin:0 0 var(--space-4)}
+a{color:var(--text-link);text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{color:var(--text-link-hover)}
+small{font:var(--type-caption);color:var(--text-muted)}
+code,kbd{font:var(--type-mono);letter-spacing:var(--track-mono)}
+hr{border:0;border-top:var(--rule-w) solid var(--border-hairline);margin:var(--space-6) 0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+::selection{background:var(--hivis-300);color:var(--stone-900)}
+.it-eyebrow{font:var(--type-eyebrow);letter-spacing:var(--track-eyebrow);text-transform:uppercase;color:var(--text-muted)}
+.it-display-1{font:var(--type-display-1);text-transform:uppercase;letter-spacing:var(--track-display);color:var(--text-strong)}
+.it-display-2{font:var(--type-display-2);text-transform:uppercase;letter-spacing:var(--track-display);color:var(--text-strong)}
+.it-display-3{font:var(--type-display-3);text-transform:uppercase;letter-spacing:var(--track-display);color:var(--text-strong)}

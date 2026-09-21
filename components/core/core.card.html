@@ -1,0 +1,54 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Core — buttons, badges, tags, avatars" subtitle="Button variants and sizes, badges, tags, avatars, rating, wordmark" -->
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{margin:0;padding:16px;background:var(--surface-card)}.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.col{display:flex;flex-direction:column;gap:12px}.lbl{font:var(--type-eyebrow);letter-spacing:var(--track-eyebrow);text-transform:uppercase;color:var(--text-subtle)}</style></head><body><div id="root"></div>
+<script type="text/babel">
+const { Button, IconButton, Badge, Tag, Avatar, Rating, Logotype, Card, CardSection, Icon } = window.InfoTrabajosDesignSystem_1be5a5;
+function Demo(){return (<div className="col">
+  <div className="row">
+    <Button>Contactar</Button>
+    <Button variant="secondary" icon="message-square">Mensaje</Button>
+    <Button variant="ghost">Cancelar</Button>
+    <Button variant="accent">Estoy disponible</Button>
+    <Button variant="danger" icon="trash">Eliminar</Button>
+    <Button variant="link">Ver más</Button>
+    <Button disabled>Enviado</Button>
+  </div>
+  <div className="row">
+    <Button size="sm">sm 34</Button><Button size="md">md 40</Button>
+    <Button size="lg">lg 48</Button><Button size="touch">touch 52</Button>
+    <IconButton icon="bell" label="Notificaciones" badge />
+    <IconButton icon="sliders-horizontal" label="Filtros" variant="outline" />
+    <IconButton icon="plus" label="Publicar" variant="solid" />
+  </div>
+  <div className="row">
+    <Badge tone="go" dot>Disponible hoy</Badge>
+    <Badge tone="brand" icon="badge-check">Identidad verificada</Badge>
+    <Badge tone="warn" icon="clock">Urgente</Badge>
+    <Badge tone="stop">Cancelada</Badge>
+    <Badge tone="info">En curso</Badge>
+    <Badge>Finalizada</Badge>
+    <Tag icon="zap" selected>Electricidad</Tag>
+    <Tag icon="droplets">Plomería</Tag>
+    <Tag onRemove={()=>{}}>A menos de 5 km</Tag>
+  </div>
+  <div className="row" style={{gap:18}}>
+    <Avatar name="Marta Quispe" size="sm" />
+    <Avatar name="Marta Quispe" verified />
+    <Avatar trade="hard-hat" size="md" />
+    <Avatar name="Julián Ruiz" size="lg" verified />
+    <Rating value={4.8} count={126} />
+    <Rating value={3.5} size={13} />
+    <Logotype variant="word-only" height={20} base="../../assets" />
+  </div>
+  <div className="row" style={{alignItems:"stretch"}}>
+    <Card style={{width:230}}><div style={{font:"var(--type-h4)"}}>Card · padding md</div><div style={{font:"var(--type-caption)",color:"var(--text-muted)",marginTop:4}}>1px borde, radio 10, shadow-1</div></Card>
+    <Card flush style={{width:230}}><div style={{padding:"var(--inset-card)",font:"var(--type-h4)"}}>Card flush</div><CardSection><span style={{font:"var(--type-caption)",color:"var(--text-muted)"}}>CardSection · hairline</span></CardSection></Card>
+  </div>
+</div>);}
+ReactDOM.createRoot(document.getElementById("root")).render(<Demo/>);
+</script></body></html>

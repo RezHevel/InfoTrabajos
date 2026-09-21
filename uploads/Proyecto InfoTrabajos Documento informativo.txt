@@ -1,0 +1,115 @@
+Pestaña 1
+Documento informativo del proyecto InfoTrabajos
+Diego Gutierrez Contreras – 218064936 – INCO
+Jaime Loza Jonathan Silvestre – 218014173 – INCO
+Universidad de Guadalajara | CUCEI
+Proyecto Modular
+Tabla de contenidos
+Tabla de contenidos2
+Introducción3
+Objetivo3
+Reto4
+Apps relacionadas (Estado del arte)4
+Diferenciador del proyecto5
+La temática6
+Fuentes7
+Introducción
+En México, el trabajo informal representa una parte importante de la actividad económica y laboral del país. De acuerdo con datos del Instituto Nacional de Estadística y Geografía (INEGI), una proporción significativa de la población ocupada trabaja bajo esquemas informales, es decir, sin acceso a seguridad social, contratos formales o protección laboral esta misma representa el 54% del trabajo en México.
+Dentro de este sector existen múltiples oficios que forman parte esencial del funcionamiento cotidiano de la sociedad, como plomería, albañilería, pintura, electricidad, carpintería, limpieza, mantenimiento, reparación y servicios técnicos independientes.
+A pesar de su importancia económica y social, gran parte de estos trabajadores continúa obteniendo clientes mediante recomendaciones personales, redes sociales, grupos locales o contacto directo, lo que genera limitaciones para encontrar oportunidades laborales, construir reputación profesional y ampliar su alcance comercial.
+Al mismo tiempo, el crecimiento del acceso a internet, teléfonos inteligentes, pagos digitales y herramientas tecnológicas ha generado nuevas oportunidades para conectar oferta y demanda de servicios.
+Este proyecto propone el desarrollo de una plataforma compuesta por una aplicación móvil y un sitio web orientados a facilitar la conexión entre trabajadores informales y personas que requieren servicios, incorporando herramientas tecnológicas para búsqueda, reputación, comunicación y administración de solicitudes.
+Objetivo
+Diseñar y desarrollar una plataforma digital (aplicación móvil y sitio web) que permita conectar trabajadores informales con potenciales clientes de manera accesible, segura y organizada.
+Objetivos específicos
+Ayudar a la búsqueda y contratación de trabajadores informales.
+Incrementar la visibilidad digital de trabajadores independientes.
+Permitir sistemas de reputación mediante calificaciones y comentarios.
+Facilitar la comunicación entre cliente y trabajador.
+Incorporar herramientas tecnológicas que ayuden a mejorar la experiencia de contratación.
+Generar una posible ruta hacia procesos de formalización y crecimiento económico.
+Justificación
+Reto
+Actualmente existen diversas problemáticas dentro del mercado informal de servicios:
+Para los trabajadores
+Dependencia del boca a boca.
+Dificultad para conseguir clientes constantes.
+Escasa presencia digital.
+Falta de historial profesional verificable.
+Ingresos variables.
+Para los clientes
+Dificultad para encontrar trabajadores confiables.
+Falta de referencias verificables.
+Incertidumbre sobre precios y calidad.
+Riesgos de fraude o incumplimiento.
+Para el ecosistema laboral
+Baja digitalización.
+Limitada recopilación de datos.
+Baja productividad.
+Escasa inclusión financiera.
+El reto principal consiste en construir una plataforma que genere confianza entre ambas partes y que sea suficientemente simple para ser utilizada por personas con distintos niveles de alfabetización digital.
+Apps relacionadas (Estado del arte)
+Existen plataformas y modelos que abordan parcialmente este problema:
+Facebook Marketplace
+Permite publicar servicios y contactar personas localmente, aunque no está diseñado específicamente para contratación laboral ni reputación profesional.
+Mercado Libre Servicios (modelos históricos de servicios)
+Exploró mecanismos de contacto entre usuarios y proveedores.
+Google Maps + perfiles de negocio
+Muchos trabajadores independientes utilizan perfiles comerciales como escaparate digital.
+TaskRabbit
+Plataforma internacional enfocada en conectar personas con trabajadores para tareas domésticas y servicios.
+Thumbtack
+Marketplace de servicios locales donde clientes solicitan cotizaciones.
+Fiverr
+Modelo de contratación por servicios independientes, principalmente digitales.
+Upwork
+Plataforma para trabajadores independientes con sistemas de reputación.
+Uber / Rappi
+Demuestran cómo la tecnología puede coordinar oferta y demanda de trabajo mediante geolocalización y reputación.
+Grupos locales de WhatsApp y Facebook
+Actualmente funcionan como una solución informal ampliamente utilizada en México.
+Diferenciador del proyecto
+A diferencia de las plataformas anteriores, esta propuesta busca enfocarse específicamente en oficios y servicios presenciales informales en México, considerando necesidades locales como:
+geolocalización;
+reputación comunitaria;
+contacto directo;
+accesibilidad;
+posible integración con pagos digitales;
+soporte para baja conectividad.
+La temática
+La aplicación estará orientada al sector de servicios y oficios independientes.
+Usuarios principales
+Trabajadores:
+Plomeros
+Albañiles
+Pintores
+Electricistas
+Carpinteros
+Técnicos
+Herreros
+Jardineros
+Personal de limpieza
+Reparadores
+Clientes:
+Personas particulares
+Negocios pequeños
+Empresas locales
+Funcionalidades propuestas:
+Registro y perfiles.
+Publicación de servicios.
+Búsqueda por ubicación.
+Sistema de reputación.
+Chat.
+Solicitud y seguimiento de trabajos.
+Cotizaciones.
+Historial.
+IA para recomendaciones y clasificación.
+(Posible mejora)
+Panel administrativo web con métricas y análisis de actividad.
+La plataforma busca convertirse en un punto de encuentro digital para profesionalizar y ampliar el alcance del trabajo informal mediante tecnología.
+Fuentes
+De Estadística Y, I. N. (s. f.). Encuesta Nacional de Ocupación y Empleo (ENOE), población de 15 años y más de edad. https://www.inegi.org.mx/programas/enoe/15ymas/
+Challenge validation. (s. f.). https://www.gob.mx/stps
+De Estadística y Geografía, I. N. (s. f.). Medición de la informalidad. https://www.inegi.org.mx/temas/pibmed/
+Informal economy. (2026, 22 enero). International Labour Organization. https://www.ilo.org/topics-and-sectors/informal-economy
+Ley Federal del Trabajo. (s. f.). Mexico Justia. Recuperado 15 de junio de 2026, de https://mexico.justia.com/federales/leyes/ley-federal-del-trabajo/

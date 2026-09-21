@@ -1,0 +1,138 @@
+<!-- @dsCard group="App móvil" viewport="880x780" name="App móvil — recorrido completo" subtitle="Login y registro con KYC, búsqueda, mapa, perfil, chat, solicitud, cotizaciones e historial" -->
+<!-- @startingPoint section="App móvil" subtitle="Pantalla de app con barra inferior" viewport="390x780" -->
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>InfoTrabajos · App</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="data.js"></script>
+<style>body{margin:0;background:var(--slate-100);display:flex;justify-content:center;padding:24px 16px}
+.phone{width:390px;height:732px;background:var(--surface-page);border-radius:var(--radius-4);border:1px solid var(--border-strong);box-shadow:var(--shadow-3);overflow:hidden;position:relative;display:flex;flex-direction:column}
+.screen{flex:1;overflow-y:auto}
+.status{height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font:var(--type-caption);font-size:11px;color:var(--text-muted);background:var(--surface-card)}
+.status.dark{background:var(--navy-900);color:var(--auth-text-muted)}
+.phone{transition:background-color var(--dur-base) var(--ease-standard)}</style>
+</head><body><div id="root"></div>
+<script type="text/babel" src="AuthScreens.jsx"></script>
+<script type="text/babel" src="HomeScreen.jsx"></script>
+<script type="text/babel" src="MapScreen.jsx"></script>
+<script type="text/babel" src="ProfileScreen.jsx"></script>
+<script type="text/babel" src="ChatScreen.jsx"></script>
+<script type="text/babel" src="PublishScreen.jsx"></script>
+<script type="text/babel" src="QuotesScreen.jsx"></script>
+<script type="text/babel" src="RequestsScreen.jsx"></script>
+<script type="text/babel" src="SettingsSheet.jsx"></script>
+<script type="text/babel">
+const { TopBar, TabBar, Logotype, IconButton, Dialog, Button, Toast, Tag, Checkbox, Field, Select, Switch } = window.InfoTrabajosDesignSystem_1be5a5;
+
+function App(){
+  const [auth,setAuth]=React.useState("login");        // login | registro | app
+  const [role,setRole]=React.useState("cliente");      // cliente | trabajador
+  const [tab,setTab]=React.useState("inicio");
+  const [worker,setWorker]=React.useState(null);
+  const [chat,setChat]=React.useState(false);
+  const [filters,setFilters]=React.useState(false);
+  const [settings,setSettings]=React.useState(false);
+  const [theme,setTheme]=React.useState(()=>localStorage.getItem("it-theme")||"light");
+  const [toast,setToast]=React.useState(null);
+  React.useEffect(()=>{ localStorage.setItem("it-theme",theme); },[theme]);
+  const sysDark=React.useMemo(()=>window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,[]);
+  const resolved=theme==="auto"?(sysDark?"dark":"light"):theme;
+  const toggleTheme=()=>setTheme(resolved==="dark"?"light":"dark");
+  React.useEffect(()=>{ if(!toast) return; const t=setTimeout(()=>setToast(null),2600); return ()=>clearTimeout(t); },[toast]);
+  const goWorker=(w)=>{setWorker(w);setChat(false);};
+
+  if(auth!=="app"){
+    return (<Frame theme={resolved} auth>
+      {auth==="login"
+        ? <LoginScreen theme={resolved} onToggleTheme={toggleTheme} onLogin={()=>setAuth("app")} onRegister={()=>setAuth("registro")} />
+        : <RegisterScreen theme={resolved} onToggleTheme={toggleTheme} onBack={()=>setAuth("login")} onDone={(r)=>{setRole(r);setAuth("app");setToast(r==="trabajador"?"Cuenta creada · completa tu perfil":"Cuenta creada");}} />}
+    </Frame>);
+  }
+
+  let bar, body;
+  if (chat) { bar=<TopBar back onBack={()=>setChat(false)} title="Conversación" />; body=<ChatScreen worker={worker} />; }
+  else if (worker) {
+    bar=<TopBar back onBack={()=>setWorker(null)} title={worker.name} subtitle={worker.trade+" · "+worker.zone}
+      actions={<IconButton icon="heart" label="Guardar" />} />;
+    body=<ProfileScreen worker={worker} onContact={()=>setChat(true)} />;
+  }
+  else if (tab==="inicio") {
+    bar=<TopBar title={<Logotype variant="word-only" height={18} base="../../assets" />}
+      actions={<><IconButton icon="bell" label="Notificaciones" badge /><IconButton icon="user-round" label="Mi cuenta" /></>} />;
+    body=<HomeScreen onWorker={goWorker} onOpenFilters={()=>setFilters(true)} />;
+  }
+  else if (tab==="cerca") { bar=<TopBar title="Cerca de ti" subtitle="Guadalajara · radio de 5 km" />; body=<MapScreen onWorker={goWorker} />; }
+  else if (tab==="publicar") { bar=<TopBar title="Publicar solicitud" />; body=<PublishScreen onPublish={()=>{setToast("Solicitud publicada · SOL-20470");setTab("cuenta");}} />; }
+  else if (tab==="mensajes") { bar=<TopBar title="Mensajes" />; body=<ChatScreen worker={window.WORKERS[0]} />; }
+  else {
+    bar=<TopBar title={role==="cliente"?"Mi cuenta":"Mis trabajos"}
+      subtitle={role==="cliente"?"Cliente":"Trabajador"}
+      actions={<IconButton icon="settings" label="Ajustes" onClick={()=>setSettings(true)} />} />;
+    body=(<div>
+      <div style={{padding:"12px 16px 0",display:"flex",gap:6}}>
+        <Tag selected={role==="cliente"} onClick={()=>setRole("cliente")}>Vista cliente</Tag>
+        <Tag selected={role==="trabajador"} onClick={()=>setRole("trabajador")}>Vista trabajador</Tag>
+      </div>
+      {role==="cliente" ? <QuotesScreen onChat={()=>{goWorker(window.WORKERS[1]);setChat(true);}} />
+        : <RequestsScreen onOpen={()=>goWorker(window.WORKERS[1])} />}
+    </div>);
+  }
+
+  return (<Frame theme={resolved}>
+    {bar}
+    <div className="screen">{body}</div>
+    <TabBar value={tab} onChange={(v)=>{setWorker(null);setChat(false);setTab(v);}} items={[
+      {value:"inicio",label:"Inicio",icon:"search"},
+      {value:"cerca",label:"Cerca",icon:"map-pin"},
+      {value:"publicar",label:"Publicar",icon:"plus"},
+      {value:"mensajes",label:"Mensajes",icon:"message-square",badge:true},
+      {value:"cuenta",label:"Cuenta",icon:"user-round"}]} />
+    {filters ? (
+      <Dialog sheet title="Filtros" onClose={()=>setFilters(false)}
+        footer={<Button block onClick={()=>setFilters(false)}>Ver 42 resultados</Button>}>
+        <div style={{display:"flex",flexDirection:"column",gap:14}}>
+          <div>
+            <div style={{font:"var(--type-label)",marginBottom:8}}>Distancia</div>
+            <div style={{display:"flex",gap:6,flexWrap:"wrap"}}><Tag selected>5 km</Tag><Tag>10 km</Tag><Tag>20 km</Tag><Tag>Toda la ZMG</Tag></div>
+          </div>
+          <Field label="Ordenar por"><Select options={["Más cerca","Mejor calificados","Tarifa más baja"]} /></Field>
+          <Checkbox label="Solo disponibles hoy" checked />
+          <Checkbox label="Solo con identidad verificada" />
+        </div>
+      </Dialog>
+    ) : null}
+    {settings ? (
+      <SettingsSheet theme={theme} onTheme={setTheme} onClose={()=>setSettings(false)}
+        onLogout={()=>{setSettings(false);setAuth("login");setTab("inicio");}} />
+    ) : null}
+    {toast ? <div style={{position:"absolute",left:16,right:16,bottom:72}}><Toast tone="go">{toast}</Toast></div> : null}
+  </Frame>);
+}
+
+function Frame({theme,auth,children}){
+  const navy=auth&&theme!=="light";
+  return (<div style={{display:"flex",gap:24,alignItems:"flex-start"}}>
+    <div className="phone" data-theme={theme}>
+      <div className={navy?"status dark":"status"}><span>9:41</span><span>InfoTrabajos</span><span>100%</span></div>
+      {auth ? <div className="screen">{children}</div> : children}
+    </div>
+    <div style={{width:400,paddingTop:8,font:"var(--type-body-sm)",color:"var(--text-body)"}}>
+      <div className="it-eyebrow" style={{marginBottom:8}}>UI kit · App móvil (React Native / Expo)</div>
+      <h2 style={{marginBottom:8}}>Recorrido interactivo</h2>
+      <ol style={{paddingLeft:18,margin:"0 0 14px",display:"flex",flexDirection:"column",gap:6}}>
+        <li>Login sobre superficie navy; “Crear cuenta” abre el registro en 3 pasos con verificación KYC (INE, selfie, domicilio).</li>
+        <li>Inicio: búsqueda, filtros en hoja inferior, categorías y resultados.</li>
+        <li>Cerca: vista de geolocalización con el hueco del mapa declarado.</li>
+        <li>Toca un profesional para ver perfil, reseñas y trabajos; “Contactar” abre el chat.</li>
+        <li>Publicar: solicitud con categoría, cotización estimada y urgencia.</li>
+        <li>Cuenta: cotizaciones recibidas e historial (cliente) o bandeja de solicitudes y métricas (trabajador).</li>
+        <li>Tema: botón sol/luna arriba a la derecha en login y registro; en Cuenta → Ajustes (ícono de engranaje) está la opción completa Claro / Oscuro / Automático. La preferencia se guarda.</li>
+      </ol>
+      <p style={{color:"var(--text-muted)",margin:0}}>Datos de muestra en <code>data.js</code>. Los componentes vienen del sistema de diseño, no están reimplementados aquí.</p>
+    </div>
+  </div>);
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script></body></html>

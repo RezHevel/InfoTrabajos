@@ -1,0 +1,74 @@
+:root{
+/* ── Base ramps ─────────────────────────────────────────────── */
+/* Azul — the brand primary, sampled from the logo (#0068E8–#0078F8). */
+--blue-50:#EAF3FE;--blue-100:#D2E5FD;--blue-200:#A6C9FB;--blue-300:#6FA9F8;
+--blue-400:#3287F4;--blue-500:#0B70F0;--blue-600:#0A5BC6;--blue-700:#09479C;
+--blue-800:#093672;--blue-900:#0A2447;
+
+/* Navy — the logo's dark half. Dark surfaces: login, footer, admin sidebar. */
+--navy-500:#123C74;--navy-600:#0C2E5C;--navy-700:#0A2348;--navy-800:#071A36;
+--navy-900:#041022;
+
+/* Slate — cool neutrals. Every light surface, border and ink value. */
+--slate-0:#FFFFFF;--slate-25:#F9FAFC;--slate-50:#F2F5F9;--slate-100:#E6EAF1;
+--slate-200:#D2D9E4;--slate-300:#B0BAC9;--slate-400:#8792A5;--slate-500:#66707F;
+--slate-600:#4B5461;--slate-700:#353C47;--slate-800:#22272F;--slate-900:#13171D;
+
+/* Ámbar — secondary accent. Stars, urgency, availability highlight.
+   Never body text on light surfaces. */
+--hivis-100:#FDF0CC;--hivis-300:#F7CE55;--hivis-500:#EDB214;--hivis-700:#A8790A;
+
+/* Status ramps */
+--go-100:#DCEFE4;--go-500:#1F7A4D;--go-700:#155634;
+--warn-100:#FBEBD2;--warn-500:#C77B0A;--warn-700:#8E5706;
+--stop-100:#FADCDA;--stop-500:#C0322A;--stop-700:#8D211B;
+--sky-100:#DCE9F1;--sky-500:#2A6B8F;--sky-700:#1C4A64;
+
+/* ── Semantic aliases ───────────────────────────────────────── */
+--brand:var(--blue-500);--brand-hover:var(--blue-600);--brand-press:var(--blue-700);
+--brand-soft:var(--blue-50);--brand-soft-border:var(--blue-200);
+--brand-deep:var(--navy-700);
+--accent:var(--hivis-500);--accent-soft:var(--hivis-100);
+
+--surface-page:var(--slate-25);
+--surface-card:var(--slate-0);
+--surface-sunken:var(--slate-50);
+--surface-raised:var(--slate-0);
+--surface-inverse:var(--navy-800);
+--surface-hover:var(--slate-50);
+--surface-press:var(--slate-100);
+--surface-disabled:var(--slate-100);
+
+--text-strong:var(--slate-900);
+--text-body:var(--slate-700);
+--text-muted:var(--slate-500);
+--text-subtle:var(--slate-400);
+--text-on-brand:var(--slate-0);
+--text-on-accent:var(--slate-900);
+--text-on-inverse:var(--slate-25);
+--text-link:var(--blue-600);
+--text-link-hover:var(--blue-700);
+
+--border-hairline:var(--slate-100);
+--border-default:var(--slate-200);
+--border-strong:var(--slate-300);
+--border-focus:var(--blue-500);
+--border-inverse:var(--navy-600);
+
+--state-go:var(--go-500);--state-go-soft:var(--go-100);
+--state-warn:var(--warn-500);--state-warn-soft:var(--warn-100);
+--state-stop:var(--stop-500);--state-stop-soft:var(--stop-100);
+--state-info:var(--sky-500);--state-info-soft:var(--sky-100);
+
+--focus-ring:0 0 0 3px color-mix(in oklab, var(--blue-500) 30%, transparent);
+--overlay-scrim:color-mix(in oklab, var(--navy-900) 58%, transparent);
+
+/* Dark auth / splash surfaces (login, registro, onboarding) */
+--auth-bg:radial-gradient(120% 90% at 50% 0%, var(--navy-700) 0%, var(--navy-900) 70%);
+--auth-card:color-mix(in oklab, var(--slate-0) 7%, transparent);
+--auth-card-border:color-mix(in oklab, var(--slate-0) 14%, transparent);
+--auth-field:color-mix(in oklab, var(--slate-0) 9%, transparent);
+--auth-text:var(--slate-0);
+--auth-text-muted:color-mix(in oklab, var(--slate-0) 62%, transparent);
+--auth-cta:linear-gradient(180deg, var(--blue-400) 0%, var(--blue-600) 100%);
+}

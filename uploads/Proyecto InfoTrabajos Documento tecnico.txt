@@ -1,0 +1,71 @@
+Documento técnico del proyecto InfoTrabajos
+Diego Gutierrez Contreras – 218064936 – INCO
+Jaime Loza Jonathan Silvestre – 218014173 – INCO
+Universidad de Guadalajara | CUCEI
+Proyecto Modular
+Tabla de contenidos
+Tabla de contenidos2
+Descripción3
+Los detalles Sofware4
+Lenguajes y frameworks5
+Base de datos5
+Conexiones y comunicación entre capas6
+Explicación técnica y funcional6
+Mensajería6
+Inicio de sesión y Registro8
+Servicios externos9
+Descripción
+El proyecto consiste en el desarrollo de una plataforma digital multiplataforma (aplicación móvil y sitio web) orientada a conectar personas que ofrecen servicios de oficios y trabajos independientes con clientes que requieren dichos servicios.
+La plataforma estará enfocada en trabajadores como albañiles, plomeros, electricistas, herreros, pintores, carpinteros, jardineros, personal de limpieza, técnicos de mantenimiento y otros prestadores de servicios independientes. A través de la aplicación y la página web, estos profesionales podrán crear un perfil, publicar los servicios que ofrecen y recibir solicitudes de trabajo.
+Por otro lado, los clientes podrán buscar trabajadores según su necesidad, ubicación, categoría, experiencia o calificaciones, así como publicar solicitudes específicas de trabajo para que los profesionales interesados puedan contactarlos.
+Tanto la aplicación móvil como la página web compartirán una misma infraestructura tecnológica, utilizando una base de datos centralizada y servicios backend que permitirán la sincronización de información en tiempo real entre ambas plataformas.
+Los detalles Sofware
+Lenguajes y frameworks
+App móvil — React Native con Expo
+Es la mejor opción porque genera iOS y Android desde un solo código, tiene soporte nativo para geolocalización, notificaciones push y cámara (fotos de perfil/trabajos), y la comunidad en México es amplia. Expo simplifica enormemente el deployment para equipos pequeños.
+Sitio web / panel admin — Next.js (React)
+Web - Next.js
+Next.js cubre tanto el sitio público orientado a clientes como el panel administrativo. Permite renderizado del lado del servidor (importante para SEO y velocidad en conexiones lentas), y puede alojar la API si decides un enfoque monolítico inicial.
+Backend — Node.js con NestJS
+NestJS
+NestJS da estructura al proyecto desde el inicio (módulos, inyección de dependencias, validaciones), lo cual es crítico cuando la plataforma crece. Si el equipo prefiere algo más simple al inicio, Express.js funciona, pero NestJS escala mejor.
+Base de datos
+La idea propuesta está más inclinada hacia PostgreSQL como base principal más Redis para caché y tiempo real con esto en mente la estructura central sería:
+Usuarios y perfiles
+users → worker_profiles (oficio, zona, portafolio) → client_profiles
+Línea de negocio
+service_requests (solicitud de un cliente) → quotes (cotizaciones de trabajadores) → jobs (trabajo aceptado) → reviews (calificación al terminar)
+Comunicación
+conversations → messages (con soporte para texto, imágenes y estado leído/no leído vía WebSocket)
+Reputación
+reviews con campos para calificación numérica, comentario, y fotos del trabajo terminado
+Geolocalización
+PostgreSQL tiene la extensión PostGIS que permite búsquedas por radio (&quot;plomeros a 5km de mí&quot;), lo cual es una ventaja enorme sobre MongoDB para este caso de uso.
+Conexiones y comunicación entre capas
+El flujo de comunicación se basaría en la siguiente filosofía: La app móvil y el sitio web se comunican con el backend exclusivamente a través de una REST API con autenticación JWT. Para el chat en tiempo real se usa WebSocket (con Socket.io), y para las notificaciones push se integra Firebase Cloud Messaging.
+El backend usa Redis para dos cosas críticas: guardar sesiones y caché de búsquedas frecuentes (trabajadores por zona), y como cola de tareas con Bull/BullMQ para procesos asincrónicos como envío de correos o procesamiento de imágenes.
+Google Maps Platform se necesita en dos puntos: en la app (para mostrar trabajadores cercanos) y en el backend (para geocodificar direcciones ingresadas por usuarios).
+Explicación técnica y funcional
+Mensajería
+El sistema de chat debería tener partes que trabajan juntas: la conexión en tiempo real vía WebSocket, y la persistencia en base de datos. Aquí el flujo completo de cómo debería viajar un mensaje:
+🟩  Confirmación de lectura (vuelve al servidor)
+Inicio de sesión y Registro
+Para esto utilizaremos un proceso específico llamado KYC (Know Your Customer) que se puede digitalizar completamente.Primero el flujo completo de registro, luego el flujo de inicio de sesión recurrente, y después el detalle técnico de cada etapa.
+Servicios externos
+Notificaciones.
+Firebase Cloud Messaging (FCM) es gratuito y cubre tanto iOS como Android con una sola integración. Es el servicio en el flujo del chat entrega push notifications cuando el usuario está desconectado.
+Twilio se puede añadir como alternativa para SMS y WhatsApp, Esto es especialmente importante para México porque muchos trabajadores informales revisan WhatsApp más que las notificaciones de una app desconocida. Twilio tiene API para ambos canales desde el mismo SDK. El costo es por mensaje (~$0.005 USD por SMS), así que solo lo activas para eventos críticos: trabajo aceptado, pago recibido, recordatorio de cita.
+Pagos.
+Aquí se usa la tecnología de Stripe y OXXO Pay. Stripe tiene soporte nativo para México y permite cobrar con tarjeta de débito/crédito y con cupones OXXO en la misma integración. El flujo de OXXO funciona así: el cliente solicita el trabajo, Stripe genera un voucher con número de referencia, el cliente lo paga en cualquier OXXO, y Stripe notifica a tu backend vía webhook cuando se confirma el pago (generalmente en minutos).
+Conekta es la alternativa 100% mexicana — procesa SPEI, OXXO y tarjetas. Vale la pena tenerla como respaldo si Stripe tiene problemas en alguna región.
+Clip entra después: es la terminal física para que los trabajadores cobren en efectivo con tarjeta, sin necesidad de que el cliente use la app. Es un diferenciador fuerte para trabajadores que prefieren cobrar en persona.
+Geolocalización
+Google Maps Platform cubre todo lo que necesitas con cuatro APIs
+La Maps JavaScript API / Maps SDK muestra el mapa en la app con los trabajadores cercanos como pines. La Places API permite al usuario buscar su dirección escribiendo texto y autocompletando. La Geocoding API convierte una dirección en coordenadas (lat/lng) para guardarlo en PostgreSQL con PostGIS. La Directions API es opcional al inicio, pero útil para mostrarle al trabajador la ruta al domicilio del cliente.
+Google da $200 USD de crédito mensual gratuito, lo que equivale a unas 40,000 llamadas a la API Maps. Para una plataforma en etapa inicial esto es más que suficiente.
+Almacenamiento
+Cloudinary es la mejor opción para imágenes porque hace compresión automática, genera diferentes tamaños (thumbnail, preview, full) y sirve las imágenes desde CDN, todo sin código adicional de tu parte. Cuando el trabajador sube una foto de un trabajo terminado, Cloudinary la optimiza automáticamente para que cargue rápido incluso con 3G.
+AWS S3 entra para documentos más formales: comprobantes de trabajo, recibos, contratos. Si el proyecto ya usa AWS para infraestructura, S3 tiene sentido desde el principio. Si no, puedes empezar solo con Cloudinary y agregar S3 después.
+Email y IA
+SendGrid (o su alternativa moderna Resend) maneja todos los correos transaccionales: bienvenida al registrarse, confirmación de trabajo aceptado, resumen semanal de ingresos para el trabajador. Tiene plan gratuito de 100 correos/día, suficiente para arrancar.
+OpenAI API entra cuando ya tienes suficientes datos de la plataforma. Los casos de uso son tres: búsqueda semántica (el cliente escribe &quot;alguien que repare lavadoras Samsung&quot; y encuentra al técnico aunque no use esas palabras exactas), recomendaciones personalizadas basadas en historial, y moderación automática de comentarios ofensivos en reseñas.
