@@ -1,4 +1,4 @@
-# InfoTrabajos — Design System
+# InfoTrabajos — Design AppSystem
 
 Sistema de diseño para **InfoTrabajos**, una plataforma multiplataforma (app móvil + sitio web) que conecta trabajadores de oficios independientes con clientes que necesitan sus servicios.
 
